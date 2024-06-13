@@ -1,7 +1,4 @@
-FROM alpine:3.19.0 AS builder
-
-#second container
-FROM alpine:3.19.0
+FROM alpine:3.19.0 
 
 RUN apk update && \
     apk add --no-cache \
