@@ -13,7 +13,7 @@ RUN apk update && \
     git \
     build-base
 
-RUN adduser -D yukinoli -s /usr/bin/bash 
+RUN adduser -D yukinoli -s /usr/bin/sh 
 
 USER yukinoli
 
