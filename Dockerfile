@@ -1,7 +1,11 @@
 FROM alpine:3.19.0 
 
+RUN sed -i 's/#\(.*\/community\)/\1/' /etc/apk/repositories
+
 RUN apk update && \
     apk add --no-cache \
+    sudo \
+    shadow \
     openssl \
     ncurses \
     wget \
@@ -11,9 +15,13 @@ RUN apk update && \
     tmux \
     zsh \
     git \
-    build-base
+    build-base \
+    bash
 
-RUN adduser -D yukinoli -s /usr/bin/sh 
+RUN adduser -D yukinoli -s /usr/bin/bash && \
+    addgroup yukinoli wheel && \
+    usermod --password $(echo 1234 | openssl passwd -1 -stdin) yukinoli && \
+    echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel 
 
 USER yukinoli
 
